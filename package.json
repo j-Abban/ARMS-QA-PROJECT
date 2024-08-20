@@ -1,0 +1,14 @@
+{
+  "name": "arms-qa-project",
+  "version": "1.0.0",
+  "description": "This is ARMS QA UPSKILLING PROJECT",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Justice Abban",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^13.13.3"
+  }
+}
