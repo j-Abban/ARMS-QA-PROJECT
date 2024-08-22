@@ -9,11 +9,15 @@ const cartPage = new CartPage();
 const checkoutPage = new CheckoutPage();
 
 describe('SauceDemo E2E Test', () => {
+
     it('should perform a full checkout process', () => {
+        cy.fixture('credentials').then((creds) => {
+            // use credentials to login
         loginPage.visit();
-        loginPage.enterUsername('standard_user');
-        loginPage.enterPassword('secret_sauce');
+        loginPage.enterUsername(creds.username);
+        loginPage.enterPassword(creds.password);
         loginPage.clickLogin();
+    });
 
         // Add items to the cart and capture their prices
         inventoryPage.addItemToCartByIndex(0);
@@ -39,7 +43,7 @@ describe('SauceDemo E2E Test', () => {
         cartPage.proceedToCheckout();
 
         // Fill in checkout form
-        checkoutPage.fillCheckoutForm('John', 'Doe', '12345');
+        checkoutPage.fillCheckoutForm('Justice', 'Aban', '12345');
         checkoutPage.continueCheckout();
 
         // Calculate expected total (sum of remaining item prices + tax)

@@ -12,6 +12,7 @@
     "arms-qa-project": "file:"
   },
   "devDependencies": {
+    "@shelex/cypress-allure-plugin": "^2.40.2",
     "cypress": "^13.13.3"
   }
 }
