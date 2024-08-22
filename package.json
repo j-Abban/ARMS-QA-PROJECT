@@ -9,6 +9,9 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "arms-qa-project": "file:"
+  },
+  "devDependencies": {
     "cypress": "^13.13.3"
   }
 }
