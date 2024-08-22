@@ -22,7 +22,7 @@ class CheckoutPage {
     }
 
     verifyOrderSuccess() {
-        cy.get('.complete-header').should('contain.text', 'THANK YOU FOR YOUR ORDER');
+        cy.get('.complete-header').should('contain.text', 'Thank you for your order!');
     }
 
     verifyCartIsEmpty() {
