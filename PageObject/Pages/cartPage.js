@@ -1,26 +1,26 @@
 class CartPage {
-    get itemPrices() {
-        return cy.get('.cart_item .inventory_item_price');
+    verifyItemsInCart(expectedItems) {
+        cy.get('.cart_item').should('have.length', expectedItems.length);
+        expectedItems.forEach((price, index) => {
+            cy.get('.cart_item').eq(index).within(() => {
+                cy.get('.inventory_item_price').should('have.text', price);
+            });
+        });
     }
 
-    get removeButtons() {
-        return cy.get('.cart_item .cart_button');
+    removeItemByIndex(index) {
+        cy.get('.cart_item').eq(index).within(() => {
+            cy.get('.cart_button').click();
+        });
     }
 
-    get checkoutButton() {
-        return cy.get('.checkout_button');
+    verifyCartCount(expectedCount) {
+        cy.get('.shopping_cart_badge').should('have.text', expectedCount);
     }
 
-    get cartItems() {
-        return cy.get('.cart_item');
-    }
-    }
-
-    get cartBadge() {
-        return cy.get('.shopping-cart_badge');
-    }
-
-    removeThirdItem() {
-        this.removeButtons.eq(2).click();
+    proceedToCheckout() {
+        cy.get('.checkout_button').click();
     }
 }
+
+export default CartPage;

@@ -1,88 +1,46 @@
-// PageObject/Pages/test.cy.js
- import Login from "../../../PageObject/Pages/loginPage";
- import cartPage from "../../../PageObject/pages/cartPage";
- import checkoutOverviewPage from "../../../PageObject/Pages/checkoutOverviewPage";
- import checkoutPage from "../../../PageObject/pages/checkoutPage";
+import LoginPage from '../../PageObject/Pages/loginPage';
+import InventoryPage from '../../PageObject/Pages/inventoryPage';
+import CartPage from '../../PageObject/Pages/cartPage';
+import CheckoutPage from '../../PageObject/Pages/checkoutPage';
 
-
-
-
-const login = new Login();
-const productPage = new productPage();
-const checkoutPage = new checkoutPage();
-const checkoutOverview = new checkoutOverviewPage();
-const cartPage = new cartPage();
+const loginPage = new LoginPage();
+const inventoryPage = new InventoryPage();
+const cartPage = new CartPage();
+const checkoutPage = new CheckoutPage();
 
 describe('SauceDemo E2E Test', () => {
+    it('should perform a full checkout process', () => {
+        loginPage.visit();
+        loginPage.enterUsername('standard_user');
+        loginPage.enterPassword('secret_sauce');
+        loginPage.clickLogin();
 
-    beforeEach(() => {
-       
-        login.visit('https://www.saucedemo.com/');
-        login.login('standard_user', 'secret_sauce');
-    });
+        inventoryPage.addItemToCartByIndex(0);
+        inventoryPage.verifyCartCount('1');
+        inventoryPage.addItemToCartByIndex(1);
+        inventoryPage.verifyCartCount('2');
+        inventoryPage.addItemToCartByIndex(2);
+        inventoryPage.verifyCartCount('3');
 
-    it('should add first three items to the cart and verify the cart count', () => {
-        
-        productPage.addFirstThreeItemsToCart();
+        inventoryPage.goToCart();
 
-       
-        productPage.cartCount.should('have.text', '3');
-
-      
-        productPage.goToCart();
-
-        
-        cartPage.itemPrices.should('have.length', 3);
-    });
-
-    it('should remove the third item from the cart and verify cart count', () => {
-        
-        ProductPage.addFirstThreeItemsToCart();
-        ProductPage.goToCart();
-
-        CartPage.removeThirdItem();
-
-        CartPage.itemPrices.should('have.length', 2);
-
-        
-        CartPage.cartBadge.should('have.text', '2');
-    });
-
-    it('should checkout, fill the form, and verify validation and prices', () => {
-      
-        ProductPage.addFirstThreeItemsToCart();
-        ProductPage.goToCart();
-        CartPage.checkoutButton.click();
-
-       
-        CheckoutPage.fillCheckoutForm('John', 'Doe', '12345');
-
-       
-        CheckoutPage.continueButton.should('be.visible');
-
-        
-        CheckoutOverviewPage.itemPrices.then($prices => {
-            const totalItemPrice = $prices.toArray().reduce((sum, price) => sum + parseFloat(price.innerText.replace('$', '')), 0);
-            CheckoutOverviewPage.totalPrice.should('have.text', `$${totalItemPrice.toFixed(2)}`);
+        cy.then(function () {
+            cartPage.verifyItemsInCart([this.itemPrice0, this.itemPrice1, this.itemPrice2]);
         });
 
-        
-        CheckoutOverviewPage.taxAmount.then($tax => {
-            const tax = parseFloat($tax.text().replace('Tax: $', ''));
-            CheckoutOverviewPage.totalAmount.should($totalAmount => {
-                const totalAmount = parseFloat($totalAmount.text().replace('Total: $', ''));
-                const expectedTotal = totalItemPrice + tax;
-                expect(totalAmount).to.eq(expectedTotal);
-            });
-        });
+        cartPage.removeItemByIndex(2);
+        cartPage.verifyCartCount('2');
 
-        
-        CheckoutOverviewPage.finishOrder();
+        cartPage.proceedToCheckout();
 
-        
-        CheckoutOverviewPage.finishButton.should('not.exist');
+        checkoutPage.fillCheckoutForm('John', 'Doe', '12345');
+        checkoutPage.continueCheckout();
 
-       
-        CheckoutOverviewPage.cartBadge.should('not.exist');
+        checkoutPage.verifyTotalAmount('$XX.XX'); // Calculate this based on prices + tax
+
+        checkoutPage.finishCheckout();
+
+        checkoutPage.verifyOrderSuccess();
+        checkoutPage.verifyCartIsEmpty();
     });
 });

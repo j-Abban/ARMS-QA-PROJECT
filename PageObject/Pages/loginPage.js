@@ -1,25 +1,19 @@
-// PageObject/Pages/loginPage.js
-
-class Login{
+class LoginPage {
     visit() {
         cy.visit('https://www.saucedemo.com/');
     }
 
-    get usernameInput() {
-        return cy.get('#username');
+    enterUsername(username) {
+        cy.get('#user-name').type(username);
     }
 
-    get passwordInput() {
-        return cy.get('#password');
+    enterPassword(password) {
+        cy.get('#password').type(password);
     }
 
-    get loginButton() {
-       return cy.get('#login-button');
-    }
-
-    login(username, password) {
-        this.usernameInput.type(username);
-        this.passwordInput.type(password);
-        this.loginButton.click();
+    clickLogin() {
+        cy.get('#login-button').click();
     }
 }
+
+export default LoginPage;
