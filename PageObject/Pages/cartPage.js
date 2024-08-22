@@ -1,4 +1,3 @@
-// PageObject/Pages/cartPage.js
 class CartPage {
     get itemPrices() {
         return cy.get('.cart_item .inventory_item_price');
@@ -15,9 +14,6 @@ class CartPage {
     get cartItems() {
         return cy.get('.cart_item');
     }
-
-    get itemCount() {
-        return cy.get('.cart_item').its('length');
     }
 
     get cartBadge() {
@@ -28,5 +24,3 @@ class CartPage {
         this.removeButtons.eq(2).click();
     }
 }
-
-export default CartPage();

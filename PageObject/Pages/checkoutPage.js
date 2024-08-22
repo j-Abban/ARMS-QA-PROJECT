@@ -1,4 +1,3 @@
-// PageObject/Pages/checkoutPage.js
 class CheckoutPage {
     get firstNameInput() {
         return cy.get('#first-name');

@@ -23,5 +23,3 @@ class Login{
         this.loginButton.click();
     }
 }
-
-export default Login;
