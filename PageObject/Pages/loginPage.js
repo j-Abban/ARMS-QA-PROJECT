@@ -1,8 +1,8 @@
 // PageObject/Pages/loginPage.js
 
-class LoginPage{
+class Login{
     visit() {
-        cy.visit('/');
+        cy.visit('https://www.saucedemo.com/');
     }
 
     get usernameInput() {
@@ -24,4 +24,4 @@ class LoginPage{
     }
 }
 
-export default new LoginPage();
+export default Login;

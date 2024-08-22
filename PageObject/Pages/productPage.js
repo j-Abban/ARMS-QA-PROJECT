@@ -41,4 +41,4 @@ class ProductPage{
     }
 }
 
-export default new ProductPage();
+export default ProductPage();
