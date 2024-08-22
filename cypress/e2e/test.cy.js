@@ -43,9 +43,10 @@ describe('SauceDemo E2E Test', () => {
         cartPage.proceedToCheckout();
 
         // Fill in checkout form
-        checkoutPage.fillCheckoutForm('Justice', 'Aban', '12345');
+        cy.fixture('credentials').then((creds) =>{
+        checkoutPage.fillCheckoutForm(creds.firstname, creds.lastname, creds.zipcode);
         checkoutPage.continueCheckout();
-
+    });
         // Calculate expected total (sum of remaining item prices + tax)
         cy.then(function () {
             const itemPrices = [parseFloat(this.itemPrice0.replace('$', '')), parseFloat(this.itemPrice1.replace('$', ''))];

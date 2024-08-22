@@ -1,6 +1,6 @@
 class LoginPage {
     visit() {
-        cy.visit('https://www.saucedemo.com/');
+        cy.visit('/');
     }
 
     enterUsername(username) {
