@@ -4,7 +4,6 @@ import CartPage from '../../PageObject/Pages/cartPage';
 import CheckoutPage from '../../PageObject/Pages/checkoutPage';
 import '@shelex/cypress-allure-plugin';
 
-
 const loginPage = new LoginPage();
 const inventoryPage = new InventoryPage();
 const cartPage = new CartPage();
@@ -49,11 +48,11 @@ describe('SauceDemo E2E Test', () => {
         checkoutPage.fillCheckoutForm(creds.firstname, creds.lastname, creds.zipcode);
         checkoutPage.continueCheckout();
     });
-        // Calculate expected total (sum of remaining item prices + tax)
+        // Calculate expected total
         cy.then(function () {
             const itemPrices = [parseFloat(this.itemPrice0.replace('$', '')), parseFloat(this.itemPrice1.replace('$', ''))];
             const totalItemPrice = itemPrices.reduce((sum, price) => sum + price, 0);
-            const taxRate = 0.08; // Assuming 8% tax for example
+            const taxRate = 0.08; 
             const expectedTotal = (totalItemPrice * (1 + taxRate)).toFixed(2);
 
             // Verify total amount
