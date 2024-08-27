@@ -2,7 +2,6 @@ import LoginPage from '../../PageObject/Pages/loginPage';
 import InventoryPage from '../../PageObject/Pages/inventoryPage';
 import CartPage from '../../PageObject/Pages/cartPage';
 import CheckoutPage from '../../PageObject/Pages/checkoutPage';
-import '@shelex/cypress-allure-plugin';
 
 const loginPage = new LoginPage();
 const inventoryPage = new InventoryPage();
