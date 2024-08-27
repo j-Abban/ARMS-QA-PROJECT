@@ -3,10 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "cypress:run": "cypress run",
-    "cypress:open": "cypress open",
-    "allure:generate": "allure generate --clean",
-    "allure:open": "allure open"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "browser:chrome": "npx cypress run --browser=chrome --headed --spec cypress/e2e/ --reporter mocha-allure-reporter",
+    "report:allure": "allure generate \"allure-results\" --clean -o \"allure-report\" && allure open \"allure-report\""
   },
   "author": "Justice Abban",
   "license": "ISC",
@@ -16,6 +15,8 @@
   },
   "devDependencies": {
     "@shelex/cypress-allure-plugin": "^2.40.2",
-    "cypress": "^13.13.3"
+    "allure-commandline": "^2.30.0",
+    "cypress": "^13.13.3",
+    "mocha-allure-reporter": "^1.4.0"
   }
 }
