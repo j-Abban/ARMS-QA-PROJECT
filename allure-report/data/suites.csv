@@ -1,0 +1,2 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","10604","should perform a full checkout process","","Tue Aug 27 21:19:10 UTC 2024","passed","Tue Aug 27 21:19:20 UTC 2024","","SauceDemo E2E Test","SauceDemo E2E Test","should perform a full checkout process"

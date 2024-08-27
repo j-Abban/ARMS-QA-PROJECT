@@ -68,3 +68,4 @@ describe('SauceDemo E2E Test', () => {
         checkoutPage.verifyCartIsEmpty();
     });
 });
+

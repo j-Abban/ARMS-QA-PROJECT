@@ -1,0 +1,15 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1724793550376' stop='1724793560981'>
+    <name>SauceDemo E2E Test</name>
+    <title>SauceDemo E2E Test</title>
+    <test-cases>
+        <test-case start='1724793550376' status='passed' stop='1724793560980'>
+            <name>should perform a full checkout process</name>
+            <title>should perform a full checkout process</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>
